@@ -1,3 +1,18 @@
+<?php
+require_once 'assets/config/database.php';
+
+$db = new Database();
+
+$pdo = $db->connect();
+
+//mostrar todos los registros de la tabla productos que esten activos procedimiento almacenado
+//pasar activo como parametro igual a 1
+$statement = $pdo->prepare("CALL mostrar_productos(?)");
+$statement->execute(array(1));
+$resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +20,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Fanlupaz_Events_login</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/styles.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -31,10 +47,67 @@
           <li class="nav-item"><a class="nav-link active" href="about.html">Sobre Nosotros</a></li>
           <li class="nav-item"><a class="nav-link" href="product.html">Paquetes</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Forros</a></li>
-        </ul><button class="btn btn-primary" type="button">Perfil</button>
+        </ul><button class="btn btn-primary" type="button">Carrito</button>
       </div>
     </div>
-  </nav><!-- End: Navbar Centered Links -->
+  </nav>
+
+  <main>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <?php 
+              
+              foreach($resultado as $row){?>
+                <div class="col">
+                    <div class="card shadow-sm">
+                      <?php
+
+                      $id = $row['id'];
+                      //imprimir id de la imagen
+                      //echo $id;
+                      $imagen = "assets/img/productos/".$id."/principal.jpg";
+
+                      if(!file_exists($imagen)){
+                        $imagen = "assets/img/no_foto.jpg";
+                      }
+                      ?>
+                        <img src="<?php echo $imagen; ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $row['nombre']; ?></h5>
+                            <p class="card-text"><?php echo number_format($row['precio'], 2, '.', ',')  ; ?></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                  <!--mostrar stock-->
+                                  <?php if($row['stock'] > 0){ ?>
+                                    <!--mostrar boton de agregar al carrito con color verde-->
+                                    <button id="agregar_carrito" type="button" class="btn btn-sm btn-outline-success">Agregar al carrito</button>
+                                    <!--mostrar box de cantidad-->
+                                    <input type="number" name="cantidad" id="cantidad" min="1" max="<?php echo $row['stock']; ?>" value="1">
+                                    
+                                  <?php }else{ ?>
+                                    <!--mostrar boton de agoregar al carrito con color rojo y deshabilitado-->
+                                    <button type="button" class="btn btn-sm btn-outline-danger" disabled>Agotado</button>
+                                  <?php }
+
+                                  ?>
+                                    <a href="#" class="btn btn-primary">Detalles</a>
+                                </div>
+                                <!--<a href="#" class="btn btn-success">Agregar</a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+
+                
+            </div>
+        </div>
+    </main>
+  
+
+    
+
+
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="assets/js/script.min.js"></script>

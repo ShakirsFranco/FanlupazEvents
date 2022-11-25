@@ -11,10 +11,14 @@ require 'PHPMailer.php';
 require 'SMTP.php';
 
 // obtener el token y el correo desde registrar.php
-$email = $_POST['email'];
+$email = $_REQUEST['email'];
 $user = new Usuarios();
 //obtener el token desde fanlupaz_funciones.php
-$token = $user->generar_token($_POST['email']);
+$token = $user->generar_token($_REQUEST['email']);
+
+//actualizar el token en la base de datos
+$user->actualizar_token($token, $email);
+
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -48,7 +52,7 @@ try {
     //$mail->Body    = 'Este es tu correo de deoble autenticacion </b>';
     // mensaje de confirmacion de registro de toke
 
-    $mail->Body = "<h1>Este es tu correo de deoble autenticacion</h1>
+    $mail->Body = "<h1>Este es tu correo de doble autenticacion</h1>
 
     <p>Este es tu token:.$token</p> ";
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
@@ -60,4 +64,5 @@ try {
     //pop up de error de envio de email
     echo "<script>alert('No se ha podido enviar el email de confirmacion a su cuenta de correo')</script>";
 }
+
 ?>

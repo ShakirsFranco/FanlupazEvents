@@ -13,7 +13,7 @@
 <body>
 
     <section class="shadow contact-clean" style="background: rgb(3,77,139);padding-bottom: 184px;">
-        <form class="bg-light border rounded border-secondary shadow-lg" method="post" style="background: rgb(248,248,249);">
+        <form class="bg-light border rounded border-secondary shadow-lg" method="POST" style="background: rgb(248,248,249);">
 
             <h2 class="text-center">Registrar</h2>
             <div class="form-group mb-3"><input class="form-control" type="text" name="name" placeholder="Nombre"></div>
@@ -22,7 +22,9 @@
             <div class="form-group mb-3"><input class="form-control" type="text" name="last_name" placeholder="Apellido" inputmode="tel"></div>
 
             <div class="form-group mb-3">
-                <input class="form-control" type="email" name="email" placeholder="Email">
+                <!-- enviar email mediante get a la pagina de validacion -->
+                <input class="form-control" type="email" name="email" placeholder="Email" inputmode="tel">
+                <!--<input class="form-control" type="email" name="email" placeholder="Email">-->
                 <input class="form-control" type="password" name="password" placeholder="Contrasena" type="password" style="width: 397.024px;padding-top: 12px;margin-top: 13px;">
                 <input class="form-control" type="password" name="validate_password" placeholder="Ingrese nuevamente contrasena" style="width: 397.024px;padding-top: 12px;margin-top: 13px;">
             </div>
@@ -39,17 +41,24 @@
             //validar datos no esten vacios, sean del tipo correcto y que la contraseña coincida y que el email no este registrado
             if (isset($_POST['registrar'])) {
 
-                //guardar token generado en una variable
-                //$token = $user->generar_token($_POST['email']);
 
-                //obtener token generado en sendemail.php
-                $token = $_GET['token'];
+                $name = $_POST['name'];
+                $last_name = $_POST['last_name'];
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $validate_password = $_POST['validate_password'];
+                $token = "";
+
+                //$user->registrar_usuario($name, $last_name, $email, $password, $validate_password, $token);
 
                 //enviar token por email
-                $user->enviar_correo($_POST['email'], $token);
+                $user->enviar_correo($_REQUEST['email']);
+
+                //verificar email
+                //$user->verificar_email($_REQUEST['email']);
 
                 //mostrar token en pantalla
-                echo "<div class='alert alert-success' role='alert'>El token es: $token</div>";
+                //echo "<div class='alert alert-success' role='alert'>El token es: $token</div>";
                 echo "<div class='alert alert-success' role='alert'>Se ha enviado un email de confirmacion a su cuenta de correo </div>";
 
                 
