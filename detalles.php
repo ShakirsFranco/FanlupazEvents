@@ -12,6 +12,28 @@ $statement = $pdo->prepare("CALL mostrar_productos(?)");
 $statement->execute(array(1));
 $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+$token = isset($_GET['token']) ? $_GET['token'] : '';
+
+if($id == '' || $token == ''){
+    echo "No se ha encontrado el producto";
+    exit;
+}else{
+
+    $token_tmp = hash_hmac('sha1', $id, KEY_TOKEN);
+    if($token == $token_tmp){
+        $statement = $pdo->prepare("CALL mostrar_producto(?)");
+        $statement->execute(array($id));
+        $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach($resultado as $fila){
+            $nombre = $fila['nombre'];
+            $descripcion = $fila['descripcion'];
+            $precio = $fila['precio'];
+            $imagen = $fila['imagen'];
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -55,53 +77,7 @@ $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
 
   <main>
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-              <?php 
-              
-              foreach($resultado as $row){?>
-                <div class="col">
-                    <div class="card shadow-sm">
-                      <?php
-
-                      $id = $row['id'];
-                      //imprimir id de la imagen
-                      //echo $id;
-                      $imagen = "assets/img/productos/".$id."/principal.jpg";
-
-                      if(!file_exists($imagen)){
-                        $imagen = "assets/img/no_foto.jpg";
-                      }
-                      ?>
-                        <img src="<?php echo $imagen; ?>">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['nombre']; ?></h5>
-                            <p class="card-text"><?php echo number_format($row['precio'], 2, '.', ',')  ; ?>
-                          </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                  <!--mostrar stock-->
-                                  <?php if($row['stock'] > 0){ ?>
-                                    <!--mostrar boton de agregar al carrito con color verde-->
-                                    <button id="agregar_carrito" type="button" class="btn btn-sm btn-outline-success">Agregar al carrito</button>
-                                    <!--mostrar box de cantidad-->
-                                    <input type="number" name="cantidad" id="cantidad" min="1" max="<?php echo $row['stock']; ?>" value="1">
-                                    
-                                  <?php }else{ ?>
-                                    <!--mostrar boton de agoregar al carrito con color rojo y deshabilitado-->
-                                    <button type="button" class="btn btn-sm btn-outline-danger" disabled>Agotado</button>
-                                  <?php }
-
-                                  ?>
-                                  <a href="detalles.php?id=<?php echo $row['id']; ?> &token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>"class="btn btn-primary">Detalles</a>
-                                    
-                                </div>
-                                <!--<a href="#" class="btn btn-success">Agregar</a>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
-            </div>
+            
         </div>
     </main>
   
