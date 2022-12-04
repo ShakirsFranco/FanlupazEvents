@@ -45,68 +45,71 @@ $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
           class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navcol-3">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a class="nav-link active" href="about.html">Sobre Nosotros</a></li>
-          <li class="nav-item"><a class="nav-link" href="product.html">Paquetes</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Forros</a></li>
+          <li class="nav-item"><a class="nav-link active" href="Homepage.php">Sobre Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="paquetes.php">Paquetes</a></li>
         </ul><button class="btn btn-primary" type="button">Carrito</button>
       </div>
     </div>
   </nav>
 
-  <main>
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-              <?php 
-              
-              foreach($resultado as $row){?>
-                <div class="col">
-                    <div class="card shadow-sm">
-                      <?php
+  <!-- crear un div para mostrar abou us -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">Sobre Nosotros</h1>
+        <!-- Acerca de la empresa -->
 
-                      $id = $row['id'];
-                      //imprimir id de la imagen
-                      //echo $id;
-                      $imagen = "assets/img/productos/".$id."/principal.jpg";
+        <p class="text-center">
+          Somos una empresa dedicada a la organización de eventos sociales y empresariales, con más de 10 años de experiencia
+          en el mercado, contamos con un equipo de profesionales que se encargan de brindar un servicio de calidad y
+          personalizado, para que tu evento sea único y especial.
+        </p>
 
-                      if(!file_exists($imagen)){
-                        $imagen = "assets/img/no_foto.jpg";
-                      }
-                      ?>
-                        <img src="<?php echo $imagen; ?>">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['nombre']; ?></h5>
-                            <p class="card-text"><?php echo number_format($row['precio'], 2, '.', ',')  ; ?>
-                          </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                  <!--mostrar stock-->
-                                  <?php if($row['stock'] > 0){ ?>
-                                    <!--mostrar boton de agregar al carrito con color verde-->
-                                    <button id="agregar_carrito" type="button" class="btn btn-sm btn-outline-success">Agregar al carrito</button>
-                                    <!--mostrar box de cantidad-->
-                                    <input type="number" name="cantidad" id="cantidad" min="1" max="<?php echo $row['stock']; ?>" value="1">
-                                    
-                                  <?php }else{ ?>
-                                    <!--mostrar boton de agoregar al carrito con color rojo y deshabilitado-->
-                                    <button type="button" class="btn btn-sm btn-outline-danger" disabled>Agotado</button>
-                                  <?php }
+        <p class="text-center">
+          Nuestro objetivo es brindar un servicio integral, desde la planeación, organización, logística y ejecución de tu
+          evento, para que tú y tus invitados disfruten de un momento inolvidable.
+        </p>
 
-                                  ?>
-                                  <a href="detalles.php?id=<?php echo $row['id']; ?> &token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>"class="btn btn-primary">Detalles</a>
-                                    
-                                </div>
-                                <!--<a href="#" class="btn btn-success">Agregar</a>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
+        <p class="text-center">
+          Contamos con un amplio portafolio de servicios, para que puedas elegir el que más se adapte a tus necesidades y
+          presupuesto.
+        </p>
+
+        <p class="text-center">
+          Nuestro equipo de trabajo está conformado por profesionales en el área de la organización de eventos, quienes se
+          encargan de brindar un servicio de calidad y personalizado, para que tu evento sea único y especial.
+        </p>
+
+
+
+        <!-- Parrafo con carrusel -->
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/img/productos/1/principal.jpg" class="d-block w-50" alt="...">
             </div>
-        </div>
-    </main>
-  
+            <div class="carousel-item">
+              <img src="assets/img/productos/2/principal.jpg" class="d-block w-50" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/3.jpg" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+      </div>
+    </div>
+  </div>
 
-    
+  
 
 
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>

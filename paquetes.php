@@ -44,10 +44,9 @@ $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
         data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span
           class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navcol-3">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a class="nav-link active" href="about.html">Sobre Nosotros</a></li>
-          <li class="nav-item"><a class="nav-link" href="product.html">Paquetes</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Forros</a></li>
+      <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link active" href="Homepage.php">Sobre Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="paquetes.php">Paquetes</a></li>
         </ul><button class="btn btn-primary" type="button">Carrito</button>
       </div>
     </div>
