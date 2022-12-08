@@ -47,7 +47,10 @@ $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"><a class="nav-link active" href="Homepage.php">Sobre Nosotros</a></li>
           <li class="nav-item"><a class="nav-link" href="paquetes.php">Paquetes</a></li>
-        </ul><button class="btn btn-primary" type="button">Carrito</button>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="registrar.php">Cerrar Sesión</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -81,33 +84,11 @@ $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
         </p>
 
 
-
-        <!-- Parrafo con carrusel -->
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="assets/img/productos/1/principal.jpg" class="d-block w-50" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/productos/2/principal.jpg" class="d-block w-50" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/3.jpg" class="d-block w-100" alt="...">
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
       </div>
     </div>
   </div>
+
+  
 
   
 

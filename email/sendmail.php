@@ -13,6 +13,7 @@ require 'SMTP.php';
 // obtener el token y el correo desde registrar.php
 $email = $_REQUEST['email'];
 $user = new Usuarios();
+
 //obtener el token desde fanlupaz_funciones.php
 $token = $user->generar_token($_REQUEST['email']);
 
@@ -55,6 +56,7 @@ try {
     $mail->Body = "<h1>Este es tu correo de doble autenticacion</h1>
 
     <p>Este es tu token:.$token</p> ";
+
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();

@@ -47,7 +47,11 @@ $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
       <ul class="navbar-nav mx-auto">
           <li class="nav-item"><a class="nav-link active" href="Homepage.php">Sobre Nosotros</a></li>
           <li class="nav-item"><a class="nav-link" href="paquetes.php">Paquetes</a></li>
-        </ul><button class="btn btn-primary" type="button">Carrito</button>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="registrar.php">Cerrar Sesión</a></li>
+        </ul>
+        
       </div>
     </div>
   </nav>
@@ -103,6 +107,18 @@ $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </main>
+
+    <?php
+  require_once('assets/class/fanlupaz_funciones.php');
+  //error_reporting(0);
+  $user = new Usuarios();
+
+  if (isset($_POST['logout'])) {
+    //redireccionar a la pagina de registrar.php
+    header('Location: registrar.php');
+  }
+
+  ?>
   
 
     
