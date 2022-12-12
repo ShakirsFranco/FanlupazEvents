@@ -82,10 +82,29 @@ $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
                           </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
+
                                  
                                   <a href="detalles.php?id=<?php echo $row['id']; ?> &token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>"class="btn btn-primary">Detalles</a>
                                     
                                 </div>
+=======
+                                  <!--mostrar stock-->
+                                  <?php if($row['stock'] > 0){ ?>
+                                    <!--mostrar boton de agregar al carrito con color verde-->
+                                    <button id="agregar_carrito" type="button" class="btn btn-sm btn-outline-success">Agregar al carrito</button>
+                                    <!--mostrar box de cantidad-->
+                                    <input type="number" name="cantidad" id="cantidad" min="1" max="<?php echo $row['stock']; ?>" value="1">
+                                    
+                                  <?php }else{ ?>
+                                    <!--mostrar boton de agoregar al carrito con color rojo y deshabilitado-->
+                                    <button type="button" class="btn btn-sm btn-outline-danger" disabled>Agotado</button>
+                                  <?php }
+
+                                  ?>
+                                  <a href="detalles.php?id=<?php echo $row['id']; ?> &token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>"class="btn btn-primary">Detalles</a>
+                                    
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -104,8 +123,8 @@ $resultado = $statement->fetchAll(PDO::FETCH_ASSOC);
     //redireccionar a la pagina de registrar.php
     header('Location: registrar.php');
   }
+
   ?>
-  
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="assets/js/script.min.js"></script>

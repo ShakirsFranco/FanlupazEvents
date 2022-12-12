@@ -4,7 +4,7 @@ class Conexion{
  private $host = "localhost";
  private $db_name = "fanlupaz";
  private $username = "root";
- private $password = "";
+ private $password = "test";
  public $conn;
  // obtener la conexion de la base de datos
  public function obtenerConexion(){

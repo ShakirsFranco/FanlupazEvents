@@ -134,6 +134,7 @@ ALTER TABLE productos ADD stock INT(11) NOT NULL AFTER precio;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `mostrar_productos_id`(IN `activo3` INT(11))
 BEGIN
     SELECT conut(id) FROM productos WHERE id = ? AND activo = activo3;
+
 END
 
 --crear procedimiento almacenado para mostrar los productos mientras id sea igual a id2 y activo sea igual a 1--
@@ -150,4 +151,5 @@ ALTER TABLE productos MODIFY descripcion TEXT;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_stock`(IN `id3` INT(11), IN `stock2` INT(11))
 BEGIN
     UPDATE productos SET stock = stock - stock2 WHERE id = id3;
+
 END

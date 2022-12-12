@@ -141,17 +141,6 @@ if ($id == '' || $token == '') {
     </div>
   </main>
 
-  <?php
-  require_once 'assets/config/conf.php';
-  require_once 'assets/config/database.php';
-  require_once 'assets/class/productos_funciones.php';
-
-
-
-
-
-  ?>
-
 
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
