@@ -128,3 +128,26 @@ ALTER TABLE productos MODIFY precio DECIMAL(10,2);
 
 --alterar tabla productos y agregar campo stock--
 ALTER TABLE productos ADD stock INT(11) NOT NULL AFTER precio;
+
+
+--crear procedimiento almacenado para mostrar los productos mientras id sea igual a id2 y activo sea igual a 1--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mostrar_productos_id`(IN `activo3` INT(11))
+BEGIN
+    SELECT conut(id) FROM productos WHERE id = ? AND activo = activo3;
+END
+
+--crear procedimiento almacenado para mostrar los productos mientras id sea igual a id2 y activo sea igual a 1--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mostrar_detalles`(IN `id2` INT(11), IN `activo3` INT(11))
+BEGIN
+    SELECT nombre, descripcion, precio FROM productos WHERE id = ? and activo = 1;
+END
+
+--modificar campo descripcion de la tabla productos para que admita html y mas caracteres--
+ALTER TABLE productos MODIFY descripcion TEXT;
+
+
+-- procedimiento almacenado para actulizar stock mediante id--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_stock`(IN `id3` INT(11), IN `stock2` INT(11))
+BEGIN
+    UPDATE productos SET stock = stock - stock2 WHERE id = id3;
+END
